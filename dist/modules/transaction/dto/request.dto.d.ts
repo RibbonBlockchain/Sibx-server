@@ -1,4 +1,4 @@
-export declare class InitiateFlutterwavePaymentParams {
+export declare class InitiatePaymentParams {
     amount: number;
     email: string;
     name: string;

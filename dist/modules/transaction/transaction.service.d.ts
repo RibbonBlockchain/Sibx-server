@@ -1,4 +1,5 @@
-import { InitiateFlutterwavePaymentParams } from './dto/request.dto';
+import { InitiatePaymentParams } from "./dto/request.dto";
 export declare class TransactionService {
-    initiateFlutterwaveTransaction(input: InitiateFlutterwavePaymentParams): Promise<any>;
+    initiateFlutterwaveTransaction(input: InitiatePaymentParams): Promise<any>;
+    initiateLazerpayTransaction(input: InitiatePaymentParams): Promise<void>;
 }

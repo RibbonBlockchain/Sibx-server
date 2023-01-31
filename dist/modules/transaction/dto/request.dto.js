@@ -9,25 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InitiateFlutterwavePaymentParams = void 0;
+exports.InitiatePaymentParams = void 0;
 const class_validator_1 = require("class-validator");
-class InitiateFlutterwavePaymentParams {
+class InitiatePaymentParams {
 }
 __decorate([
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], InitiateFlutterwavePaymentParams.prototype, "amount", void 0);
+], InitiatePaymentParams.prototype, "amount", void 0);
 __decorate([
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], InitiateFlutterwavePaymentParams.prototype, "email", void 0);
+], InitiatePaymentParams.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], InitiateFlutterwavePaymentParams.prototype, "name", void 0);
+], InitiatePaymentParams.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
-], InitiateFlutterwavePaymentParams.prototype, "phoneNumber", void 0);
-exports.InitiateFlutterwavePaymentParams = InitiateFlutterwavePaymentParams;
+], InitiatePaymentParams.prototype, "phoneNumber", void 0);
+exports.InitiatePaymentParams = InitiatePaymentParams;
 //# sourceMappingURL=request.dto.js.map

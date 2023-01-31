@@ -1,6 +1,6 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
-export class InitiateFlutterwavePaymentParams {
+export class InitiatePaymentParams {
   @IsNumber()
   amount: number;
   @IsEmail()

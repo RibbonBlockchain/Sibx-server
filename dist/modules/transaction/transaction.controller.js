@@ -23,16 +23,26 @@ let TransactionController = class TransactionController {
     initiateFlutterwavePayment(input) {
         return this.transactionService.initiateFlutterwaveTransaction(input);
     }
+    initiateLazerpayPayment(input) {
+        return this.transactionService.initiateLazerpayTransaction(input);
+    }
 };
 __decorate([
-    (0, common_1.Post)('initiate-flutterwave-payment'),
+    (0, common_1.Post)("initiate-flutterwave-payment"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [request_dto_1.InitiateFlutterwavePaymentParams]),
+    __metadata("design:paramtypes", [request_dto_1.InitiatePaymentParams]),
     __metadata("design:returntype", void 0)
 ], TransactionController.prototype, "initiateFlutterwavePayment", null);
+__decorate([
+    (0, common_1.Post)("initiate-lazerpay-payment"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [request_dto_1.InitiatePaymentParams]),
+    __metadata("design:returntype", void 0)
+], TransactionController.prototype, "initiateLazerpayPayment", null);
 TransactionController = __decorate([
-    (0, common_1.Controller)('transaction'),
+    (0, common_1.Controller)("transaction"),
     __metadata("design:paramtypes", [transaction_service_1.TransactionService])
 ], TransactionController);
 exports.TransactionController = TransactionController;

@@ -1,13 +1,18 @@
-import { Controller, Post, Body } from '@nestjs/common';
-import { InitiateFlutterwavePaymentParams } from './dto/request.dto';
-import { TransactionService } from './transaction.service';
+import { Controller, Post, Body } from "@nestjs/common";
+import { InitiatePaymentParams } from "./dto/request.dto";
+import { TransactionService } from "./transaction.service";
 
-@Controller('transaction')
+@Controller("transaction")
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  @Post('initiate-flutterwave-payment')
-  initiateFlutterwavePayment(@Body() input: InitiateFlutterwavePaymentParams) {
+  @Post("initiate-flutterwave-payment")
+  initiateFlutterwavePayment(@Body() input: InitiatePaymentParams) {
     return this.transactionService.initiateFlutterwaveTransaction(input);
+  }
+
+  @Post("initiate-lazerpay-payment")
+  initiateLazerpayPayment(@Body() input: InitiatePaymentParams) {
+    return this.transactionService.initiateLazerpayTransaction(input);
   }
 }
