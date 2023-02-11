@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from "@nestjs/common";
+import { Controller, Post, Body, Get } from "@nestjs/common";
 import { InitiatePaymentParams } from "./dto/request.dto";
 import { TransactionService } from "./transaction.service";
 
