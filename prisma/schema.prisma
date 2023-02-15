@@ -27,7 +27,7 @@ model User {
 }
 
 model Bond {
-  id                                 Int      @id @default(autoincrement())
+  id                                 Int           @id @default(autoincrement())
   image                              String
   firstName                          String
   lastName                           String
@@ -57,10 +57,11 @@ model Bond {
   overallObjectives                  String
   outcomeMetrics                     String
   outcomeTarget                      String
-  user                               User?    @relation(fields: [userId], references: [id])
+  category                           BOND_CATEGORY
+  user                               User?         @relation(fields: [userId], references: [id])
   userId                             Int?
-  createdAt                          DateTime @default(now())
-  updatedAt                          DateTime @updatedAt
+  createdAt                          DateTime      @default(now())
+  updatedAt                          DateTime      @updatedAt
 
   @@map("bond")
 }
@@ -83,4 +84,10 @@ model Token {
 enum ACCOUNT_TYPE {
   INDIVIDUAL
   ORGANIZATION
+}
+
+enum BOND_CATEGORY {
+  FIAT
+  TOKENIZED
+  BOTH
 }

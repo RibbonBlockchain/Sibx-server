@@ -1,4 +1,5 @@
-import { IsArray, IsBoolean, IsString } from "class-validator";
+import { BOND_CATEGORY } from "@prisma/client";
+import { IsArray, IsBoolean, IsEnum, IsString } from "class-validator";
 
 export class CreateBondInput {
   @IsString()
@@ -59,36 +60,6 @@ export class CreateBondInput {
   outcomeMetrics: string;
   @IsString()
   outcomeTarget: string;
+  @IsEnum(BOND_CATEGORY)
+  category: BOND_CATEGORY;
 }
-
-// {
-//   "firstName": "Ayeola",
-//   "lastName": "Kehinde",
-//   "image": "google.com",
-//   "organizationName": "ayeolakenny",
-//   "organizationEmail": "ayeolakenny@gmail.com",
-//   "phoneNumber": "+2349026503960",
-//   "websiteUrl": "ayeolakenny.vercelapp.com",
-//   "comapnyRegistrationNumber": "12345",
-//   "socialMedia": ["www.twitter.com"],
-//   "organizationIncorporated": true,
-//   "organizationLegalEstablishmentDate": "11-11-1995",
-//   "organizationRevenue": "10000",
-//   "amountToRaise": "100000",
-//   "reasonForRaisingMoney": "Fund School Children",
-//   "organizationHasLegalDocs": true,
-//   "launchDate": "12-23-1223",
-//   "serviceProvider": "mtn",
-//   "amountToBeRaised": "100",
-//   "duration": "1 month",
-//   "projectIrr": "12345",
-//   "maxOutcomePay": "100",
-//   "transactionFee": "100",
-//   "totalPlatformCost": "100",
-//   "policyArea": "100",
-//   "targetPopulation": "100",
-//   "independentEvaluator": "this is it",
-//   "overallObjectives": "Fund 100 people",
-//   "outcomeMetrics": "100",
-//   "outcomeTarget": "10900"
-// }

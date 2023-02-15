@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BondController = void 0;
 const common_1 = require("@nestjs/common");
+const client_1 = require("@prisma/client");
 const auth_decorator_1 = require("../auth/decorators/auth.decorator");
 const bond_service_1 = require("./bond.service");
 const bond_request_1 = require("./dto/bond.request");
@@ -23,6 +24,15 @@ let BondController = class BondController {
     }
     createBond(req, input) {
         return this.bondService.createBond(req.user.userId, input);
+    }
+    findAllBonds() {
+        return this.bondService.findAllBonds();
+    }
+    findOneBond(params) {
+        return this.bondService.findOneBond(params.id);
+    }
+    findBondType(type) {
+        return this.bondService.findBondType(type);
     }
 };
 __decorate([
@@ -34,6 +44,26 @@ __decorate([
     __metadata("design:paramtypes", [Object, bond_request_1.CreateBondInput]),
     __metadata("design:returntype", void 0)
 ], BondController.prototype, "createBond", null);
+__decorate([
+    (0, common_1.Get)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "findAllBonds", null);
+__decorate([
+    (0, common_1.Get)(":id"),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "findOneBond", null);
+__decorate([
+    (0, common_1.Get)("type"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "findBondType", null);
 BondController = __decorate([
     (0, common_1.Controller)("bond"),
     __metadata("design:paramtypes", [bond_service_1.BondService])

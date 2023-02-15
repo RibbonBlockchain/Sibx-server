@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateBondInput = void 0;
+const client_1 = require("@prisma/client");
 const class_validator_1 = require("class-validator");
 class CreateBondInput {
 }
@@ -129,5 +130,9 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "outcomeTarget", void 0);
+__decorate([
+    (0, class_validator_1.IsEnum)(client_1.BOND_CATEGORY),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "category", void 0);
 exports.CreateBondInput = CreateBondInput;
 //# sourceMappingURL=bond.request.js.map

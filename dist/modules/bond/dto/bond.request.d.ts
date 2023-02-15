@@ -1,3 +1,4 @@
+import { BOND_CATEGORY } from "@prisma/client";
 export declare class CreateBondInput {
     firstName: string;
     lastName: string;
@@ -28,4 +29,5 @@ export declare class CreateBondInput {
     overallObjectives: string;
     outcomeMetrics: string;
     outcomeTarget: string;
+    category: BOND_CATEGORY;
 }

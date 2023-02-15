@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BondService = void 0;
 const common_1 = require("@nestjs/common");
+const client_1 = require("@prisma/client");
 const prisma_service_1 = require("../../prisma.service");
 let BondService = class BondService {
     constructor(prisma) {
@@ -28,6 +29,29 @@ let BondService = class BondService {
             throw new common_1.BadRequestException({
                 name: "bond",
                 message: "unable to create bond",
+            });
+        }
+    }
+    async findAllBonds() {
+        return await this.prisma.bond.findMany();
+    }
+    async findOneBond(bondId) {
+        return await this.prisma.bond.findUnique({ where: { id: bondId } });
+    }
+    async findBondType(type) {
+        if (type === client_1.BOND_CATEGORY.BOTH) {
+            return await this.prisma.bond.findMany({
+                where: { category: client_1.BOND_CATEGORY.BOTH },
+            });
+        }
+        else if (type === client_1.BOND_CATEGORY.FIAT) {
+            return await this.prisma.bond.findMany({
+                where: { category: client_1.BOND_CATEGORY.FIAT },
+            });
+        }
+        else {
+            return await this.prisma.bond.findMany({
+                where: { category: client_1.BOND_CATEGORY.TOKENIZED },
             });
         }
     }
