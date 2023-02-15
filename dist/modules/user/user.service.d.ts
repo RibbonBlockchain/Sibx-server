@@ -9,5 +9,6 @@ export declare class UserService {
     private readonly tokenService;
     constructor(prisma: PrismaService, mailService: MailService, tokenService: TokenService);
     register(input: UserRegisterInput): Promise<Boolean>;
+    confirmUserToken(token: string): Promise<boolean>;
     findOneByUsernameOrEmail(usernameOrEmail: string): Promise<User | undefined>;
 }

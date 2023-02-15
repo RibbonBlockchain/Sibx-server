@@ -21,8 +21,48 @@ model User {
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
   token       Token[]
+  bond        Bond[]
 
   @@map("user")
+}
+
+model Bond {
+  id                                 Int      @id @default(autoincrement())
+  image                              String
+  firstName                          String
+  lastName                           String
+  organizationName                   String
+  organizationEmail                  String
+  phoneNumber                        String
+  websiteUrl                         String
+  comapnyRegistrationNumber          String
+  socialMedia                        String[]
+  organizationIncorporated           Boolean
+  organizationLegalEstablishmentDate String
+  organizationRevenue                String
+  amountToRaise                      String
+  reasonForRaisingMoney              String
+  organizationHasLegalDocs           Boolean
+  launchDate                         String
+  serviceProvider                    String
+  amountToBeRaised                   String
+  duration                           String
+  projectIrr                         String
+  maxOutcomePay                      String
+  transactionFee                     String
+  totalPlatformCost                  String
+  policyArea                         String
+  targetPopulation                   String
+  independentEvaluator               String
+  overallObjectives                  String
+  outcomeMetrics                     String
+  outcomeTarget                      String
+  user                               User?    @relation(fields: [userId], references: [id])
+  userId                             Int?
+  createdAt                          DateTime @default(now())
+  updatedAt                          DateTime @updatedAt
+
+  @@map("bond")
 }
 
 model Token {

@@ -59,12 +59,41 @@ let UserService = class UserService {
         });
         return true;
     }
+    async confirmUserToken(token) {
+        const userToken = await this.prisma.token.findFirst({
+            where: { code: token },
+        });
+        if (!userToken)
+            return false;
+        const tokenIsValid = await this.tokenService.checkTokenValidity({
+            token,
+            email: userToken.email,
+        });
+        if (!tokenIsValid) {
+            throw new common_1.BadRequestException({
+                name: "token",
+                message: "token is not valid",
+            });
+        }
+        await this.prisma.user.update({
+            where: { email: userToken.email },
+            data: { verified: true },
+        });
+        return true;
+    }
     async findOneByUsernameOrEmail(usernameOrEmail) {
-        return usernameOrEmail.includes("@")
+        const user = usernameOrEmail.includes("@")
             ? await this.prisma.user.findUnique({ where: { email: usernameOrEmail } })
             : await this.prisma.user.findUnique({
                 where: { username: usernameOrEmail },
             });
+        if (user.verified === false) {
+            throw new common_1.BadRequestException({
+                name: "user",
+                message: "Kindly verify your account!",
+            });
+        }
+        return user;
     }
 };
 UserService = __decorate([
