@@ -23,8 +23,8 @@ let UserController = class UserController {
     registerUser(input) {
         return this.userService.register(input);
     }
-    confirmUserToken(token) {
-        return this.userService.confirmUserToken(token);
+    confirmUserToken(input) {
+        return this.userService.confirmUserToken(input.token);
     }
 };
 __decorate([
@@ -38,7 +38,7 @@ __decorate([
     (0, common_1.Post)("confirm-token"),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "confirmUserToken", null);
 UserController = __decorate([

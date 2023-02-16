@@ -12,7 +12,7 @@ export class UserController {
   }
 
   @Post("confirm-token")
-  confirmUserToken(@Body() token: string) {
-    return this.userService.confirmUserToken(token);
+  confirmUserToken(@Body() input: { token: string }) {
+    return this.userService.confirmUserToken(input.token);
   }
 }

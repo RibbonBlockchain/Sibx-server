@@ -81,6 +81,10 @@ export class UserService {
       where: { email: userToken.email },
       data: { verified: true },
     });
+    await this.prisma.token.update({
+      where: { code: token },
+      data: { validity: false },
+    });
     return true;
   }
 
