@@ -3,12 +3,20 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./modules/auth/auth.module";
 import { BondModule } from "./modules/bond/bond.module";
+import { CloudinaryModule } from "./modules/cloudinary/cloudinary.module";
 import { TokenModule } from "./modules/token/token.module";
 import { TransactionModule } from "./modules/transaction/transaction.module";
 import { UserModule } from "./modules/user/user.module";
 
 @Module({
-  imports: [TransactionModule, UserModule, AuthModule, TokenModule, BondModule],
+  imports: [
+    TransactionModule,
+    UserModule,
+    AuthModule,
+    TokenModule,
+    BondModule,
+    CloudinaryModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

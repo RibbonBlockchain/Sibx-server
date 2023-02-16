@@ -63,3 +63,8 @@ export class CreateBondInput {
   @IsEnum(BOND_CATEGORY)
   category: BOND_CATEGORY;
 }
+
+export class UploadImageDto {
+  @IsString()
+  imageFor: string;
+}

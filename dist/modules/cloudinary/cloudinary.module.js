@@ -6,20 +6,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BondModule = void 0;
+exports.CloudinaryModule = void 0;
 const common_1 = require("@nestjs/common");
-const bond_service_1 = require("./bond.service");
-const bond_controller_1 = require("./bond.controller");
-const prisma_service_1 = require("../../prisma.service");
-const cloudinary_module_1 = require("../cloudinary/cloudinary.module");
-let BondModule = class BondModule {
+const cloudinary_service_1 = require("./cloudinary.service");
+let CloudinaryModule = class CloudinaryModule {
 };
-BondModule = __decorate([
+CloudinaryModule = __decorate([
     (0, common_1.Module)({
-        controllers: [bond_controller_1.BondController],
-        providers: [bond_service_1.BondService, prisma_service_1.PrismaService],
-        imports: [cloudinary_module_1.CloudinaryModule],
+        providers: [cloudinary_service_1.CloudinaryService],
+        exports: [cloudinary_service_1.CloudinaryService],
     })
-], BondModule);
-exports.BondModule = BondModule;
-//# sourceMappingURL=bond.module.js.map
+], CloudinaryModule);
+exports.CloudinaryModule = CloudinaryModule;
+//# sourceMappingURL=cloudinary.module.js.map

@@ -14,13 +14,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BondController = void 0;
 const common_1 = require("@nestjs/common");
+const platform_express_1 = require("@nestjs/platform-express");
 const client_1 = require("@prisma/client");
+const constants_1 = require("../../constants");
 const auth_decorator_1 = require("../auth/decorators/auth.decorator");
+const cloudinary_service_1 = require("../cloudinary/cloudinary.service");
 const bond_service_1 = require("./bond.service");
 const bond_request_1 = require("./dto/bond.request");
 let BondController = class BondController {
-    constructor(bondService) {
+    constructor(bondService, cloudinaryService) {
         this.bondService = bondService;
+        this.cloudinaryService = cloudinaryService;
     }
     createBond(req, input) {
         return this.bondService.createBond(req.user.userId, input);
@@ -33,6 +37,22 @@ let BondController = class BondController {
     }
     findBondType(type) {
         return this.bondService.findBondType(type);
+    }
+    async uploadBondImage(file, input) {
+        if (input.imageFor !== constants_1.IMAGE_TYPE.BOND) {
+            throw new common_1.BadRequestException({
+                name: "upload",
+                message: "Upload not successful",
+            });
+        }
+        const uploadData = await this.cloudinaryService.uploadMedia(file, input.imageFor);
+        return {
+            data: {
+                imageUrl: uploadData.secure_url,
+                imageKey: uploadData.public_id,
+                isUploaded: true,
+            },
+        };
     }
 };
 __decorate([
@@ -64,9 +84,19 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], BondController.prototype, "findBondType", null);
+__decorate([
+    (0, common_1.Post)("upload-bond-image"),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file")),
+    __param(0, (0, common_1.UploadedFile)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, bond_request_1.UploadImageDto]),
+    __metadata("design:returntype", Promise)
+], BondController.prototype, "uploadBondImage", null);
 BondController = __decorate([
     (0, common_1.Controller)("bond"),
-    __metadata("design:paramtypes", [bond_service_1.BondService])
+    __metadata("design:paramtypes", [bond_service_1.BondService,
+        cloudinary_service_1.CloudinaryService])
 ], BondController);
 exports.BondController = BondController;
 //# sourceMappingURL=bond.controller.js.map

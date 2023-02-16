@@ -31,3 +31,6 @@ export declare class CreateBondInput {
     outcomeTarget: string;
     category: BOND_CATEGORY;
 }
+export declare class UploadImageDto {
+    imageFor: string;
+}

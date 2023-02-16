@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateBondInput = void 0;
+exports.UploadImageDto = exports.CreateBondInput = void 0;
 const client_1 = require("@prisma/client");
 const class_validator_1 = require("class-validator");
 class CreateBondInput {
@@ -135,4 +135,11 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "category", void 0);
 exports.CreateBondInput = CreateBondInput;
+class UploadImageDto {
+}
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UploadImageDto.prototype, "imageFor", void 0);
+exports.UploadImageDto = UploadImageDto;
 //# sourceMappingURL=bond.request.js.map
