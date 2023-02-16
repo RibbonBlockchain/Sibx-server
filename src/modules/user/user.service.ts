@@ -55,7 +55,7 @@ export class UserService {
       to: newUser.email,
       subject: MAIL_SUBJECT.VERIFY_ACCOUNT,
       html: MAIL_MESSAGE.VERIFY_ACCOUNT(
-        `${process.env.CLIENT_DEPLOYED_URL}/register?token=${verificationToken.code}&type=new_user`
+        `${process.env.CLIENT_DEPLOYED_URL}/signup/verify?token=${verificationToken.code}&type=new_user`
       ),
     });
 
