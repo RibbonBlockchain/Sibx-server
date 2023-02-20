@@ -55,7 +55,7 @@ let UserService = class UserService {
         await this.mailService.sendMail({
             to: newUser.email,
             subject: mail_constants_1.MAIL_SUBJECT.VERIFY_ACCOUNT,
-            html: mail_constants_1.MAIL_MESSAGE.VERIFY_ACCOUNT(`${process.env.CLIENT_DEPLOYED_URL}/register?token=${verificationToken.code}&type=new_user`),
+            html: mail_constants_1.MAIL_MESSAGE.VERIFY_ACCOUNT(`${process.env.CLIENT_DEPLOYED_URL}/signup/verify?token=${verificationToken.code}&type=new_user`),
         });
         return true;
     }

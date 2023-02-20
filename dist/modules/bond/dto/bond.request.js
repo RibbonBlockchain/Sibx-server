@@ -45,7 +45,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateBondInput.prototype, "comapnyRegistrationNumber", void 0);
+], CreateBondInput.prototype, "companyRegistrationNumber", void 0);
 __decorate([
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
