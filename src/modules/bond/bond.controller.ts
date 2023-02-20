@@ -5,6 +5,7 @@ import {
   Get,
   Param,
   Post,
+  Query,
   Request,
   UploadedFile,
   UseInterceptors,
@@ -35,15 +36,17 @@ export class BondController {
     return this.bondService.findAllBonds();
   }
 
+  @Get("type")
+  findBondType(@Query('type') type: BOND_CATEGORY) {
+    return this.bondService.findBondType(type);
+  }
+
+
   @Get(":id")
   findOneBond(@Param() params) {
     return this.bondService.findOneBond(params.id);
   }
 
-  @Get("type")
-  findBondType(@Body() type: BOND_CATEGORY) {
-    return this.bondService.findBondType(type);
-  }
 
   @Post("upload-bond-image")
   @UseInterceptors(FileInterceptor("file"))
