@@ -40,11 +40,11 @@ export class BondService {
       });
     } else if (type === BOND_CATEGORY.FIAT) {
       return await this.prisma.bond.findMany({
-        where: { category: BOND_CATEGORY.FIAT },
+        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.FIAT } ] },
       });
     } else {
       return await this.prisma.bond.findMany({
-        where: { category: BOND_CATEGORY.TOKENIZED },
+        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.TOKENIZED } ] },
       });
     }
   }
