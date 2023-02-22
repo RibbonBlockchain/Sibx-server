@@ -1,11 +1,15 @@
 import { BOND_CATEGORY } from "@prisma/client";
-import { IsArray, IsBoolean, IsEnum, IsString } from "class-validator";
+import {
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsNumber,
+  IsString,
+} from "class-validator";
 
 export class CreateBondInput {
   @IsString()
-  firstName: string;
-  @IsString()
-  lastName: string;
+  name: string;
   @IsString()
   image: string;
   @IsString()
@@ -26,8 +30,8 @@ export class CreateBondInput {
   organizationLegalEstablishmentDate: string;
   @IsString()
   organizationRevenue: string;
-  @IsString()
-  amountToRaise: string;
+  @IsNumber()
+  amountToRaise: number;
   @IsString()
   reasonForRaisingMoney: string;
   @IsBoolean()
@@ -38,20 +42,20 @@ export class CreateBondInput {
   serviceProvider: string;
   @IsString()
   amountToBeRaised: string;
-  @IsString()
-  duration: string;
-  @IsString()
-  projectIrr: string;
-  @IsString()
-  maxOutcomePay: string;
-  @IsString()
-  transactionFee: string;
-  @IsString()
-  totalPlatformCost: string;
+  @IsNumber()
+  duration: number;
+  @IsNumber()
+  projectIrr: number;
+  @IsNumber()
+  maxOutcomePay: number;
+  @IsNumber()
+  transactionFee: number;
+  @IsNumber()
+  totalPlatformCost: number;
   @IsString()
   policyArea: string;
-  @IsString()
-  targetPopulation: string;
+  @IsNumber()
+  targetPopulation: number;
   @IsString()
   independentEvaluator: string;
   @IsString()

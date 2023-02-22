@@ -17,11 +17,7 @@ class CreateBondInput {
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateBondInput.prototype, "firstName", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateBondInput.prototype, "lastName", void 0);
+], CreateBondInput.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -63,8 +59,8 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "organizationRevenue", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "amountToRaise", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
@@ -87,32 +83,32 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "amountToBeRaised", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "duration", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "projectIrr", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "maxOutcomePay", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "transactionFee", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "totalPlatformCost", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "policyArea", void 0);
 __decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateBondInput.prototype, "targetPopulation", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),

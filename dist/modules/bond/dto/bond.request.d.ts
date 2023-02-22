@@ -1,7 +1,6 @@
 import { BOND_CATEGORY } from "@prisma/client";
 export declare class CreateBondInput {
-    firstName: string;
-    lastName: string;
+    name: string;
     image: string;
     organizationName: string;
     organizationEmail: string;
@@ -12,19 +11,19 @@ export declare class CreateBondInput {
     organizationIncorporated: boolean;
     organizationLegalEstablishmentDate: string;
     organizationRevenue: string;
-    amountToRaise: string;
+    amountToRaise: number;
     reasonForRaisingMoney: string;
     organizationHasLegalDocs: boolean;
     launchDate: string;
     serviceProvider: string;
     amountToBeRaised: string;
-    duration: string;
-    projectIrr: string;
-    maxOutcomePay: string;
-    transactionFee: string;
-    totalPlatformCost: string;
+    duration: number;
+    projectIrr: number;
+    maxOutcomePay: number;
+    transactionFee: number;
+    totalPlatformCost: number;
     policyArea: string;
-    targetPopulation: string;
+    targetPopulation: number;
     independentEvaluator: string;
     overallObjectives: string;
     outcomeMetrics: string;
