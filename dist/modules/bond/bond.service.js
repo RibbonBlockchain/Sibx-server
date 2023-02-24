@@ -46,12 +46,12 @@ let BondService = class BondService {
         }
         else if (type === client_1.BOND_CATEGORY.FIAT) {
             return await this.prisma.bond.findMany({
-                where: { category: client_1.BOND_CATEGORY.FIAT },
+                where: { OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.FIAT }] },
             });
         }
         else {
             return await this.prisma.bond.findMany({
-                where: { category: client_1.BOND_CATEGORY.TOKENIZED },
+                where: { OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.TOKENIZED }] },
             });
         }
     }

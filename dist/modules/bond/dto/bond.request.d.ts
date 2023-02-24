@@ -29,6 +29,13 @@ export declare class CreateBondInput {
     outcomeMetrics: string;
     outcomeTarget: string;
     category: BOND_CATEGORY;
+    description: string;
+    facebookLink: string;
+    linkedinLink: string;
+    twitterLink: string;
+    instagramLink: string;
+    websiteLink: string;
+    other: string;
 }
 export declare class UploadImageDto {
     imageFor: string;

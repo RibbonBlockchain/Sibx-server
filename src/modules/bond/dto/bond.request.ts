@@ -66,6 +66,20 @@ export class CreateBondInput {
   outcomeTarget: string;
   @IsEnum(BOND_CATEGORY)
   category: BOND_CATEGORY;
+  @IsString()
+  description: string;
+  @IsString()
+  facebookLink: string;
+  @IsString()
+  linkedinLink: string;
+  @IsString()
+  twitterLink: string;
+  @IsString()
+  instagramLink: string;
+  @IsString()
+  websiteLink: string;
+  @IsString()
+  other: string;
 }
 
 export class UploadImageDto {

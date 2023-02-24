@@ -56,6 +56,13 @@ model Bond {
   overallObjectives                  String
   outcomeMetrics                     String
   outcomeTarget                      String
+  description                        String
+  facebookLink                       String
+  linkedinLink                       String
+  twitterLink                        String
+  instagramLink                      String
+  websiteLink                        String
+  other                              String
   category                           BOND_CATEGORY
   user                               User?         @relation(fields: [userId], references: [id])
   userId                             Int?

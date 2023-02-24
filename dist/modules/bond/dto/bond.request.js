@@ -130,6 +130,34 @@ __decorate([
     (0, class_validator_1.IsEnum)(client_1.BOND_CATEGORY),
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "category", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "description", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "facebookLink", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "linkedinLink", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "twitterLink", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "instagramLink", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "websiteLink", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateBondInput.prototype, "other", void 0);
 exports.CreateBondInput = CreateBondInput;
 class UploadImageDto {
 }

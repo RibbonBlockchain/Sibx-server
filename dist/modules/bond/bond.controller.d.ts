@@ -9,8 +9,8 @@ export declare class BondController {
     constructor(bondService: BondService, cloudinaryService: CloudinaryService);
     createBond(req: any, input: CreateBondInput): Promise<any>;
     findAllBonds(): Promise<import(".prisma/client").Bond[]>;
-    findOneBond(params: any): Promise<import(".prisma/client").Bond>;
     findBondType(type: BOND_CATEGORY): Promise<import(".prisma/client").Bond[]>;
+    findOneBond(params: any): Promise<import(".prisma/client").Bond>;
     uploadBondImage(file: Express.Multer.File, input: UploadImageDto): Promise<{
         data: {
             imageUrl: any;

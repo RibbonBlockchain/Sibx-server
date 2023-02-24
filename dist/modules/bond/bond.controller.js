@@ -32,11 +32,11 @@ let BondController = class BondController {
     findAllBonds() {
         return this.bondService.findAllBonds();
     }
-    findOneBond(params) {
-        return this.bondService.findOneBond(params.id);
-    }
     findBondType(type) {
         return this.bondService.findBondType(type);
+    }
+    findOneBond(params) {
+        return this.bondService.findOneBond(params.id);
     }
     async uploadBondImage(file, input) {
         if (input.imageFor !== constants_1.IMAGE_TYPE.BOND) {
@@ -71,19 +71,19 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BondController.prototype, "findAllBonds", null);
 __decorate([
+    (0, common_1.Get)("type"),
+    __param(0, (0, common_1.Query)('type')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "findBondType", null);
+__decorate([
     (0, common_1.Get)(":id"),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], BondController.prototype, "findOneBond", null);
-__decorate([
-    (0, common_1.Get)("type"),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], BondController.prototype, "findBondType", null);
 __decorate([
     (0, common_1.Post)("upload-bond-image"),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)("file")),
