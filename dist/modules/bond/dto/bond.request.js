@@ -43,10 +43,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBondInput.prototype, "companyRegistrationNumber", void 0);
 __decorate([
-    (0, class_validator_1.IsArray)(),
-    __metadata("design:type", Array)
-], CreateBondInput.prototype, "socialMedia", void 0);
-__decorate([
     (0, class_validator_1.IsBoolean)(),
     __metadata("design:type", Boolean)
 ], CreateBondInput.prototype, "organizationIncorporated", void 0);

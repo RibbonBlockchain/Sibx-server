@@ -37,16 +37,14 @@ export class BondController {
   }
 
   @Get("type")
-  findBondType(@Query('type') type: BOND_CATEGORY) {
+  findBondType(@Query("type") type: BOND_CATEGORY) {
     return this.bondService.findBondType(type);
   }
-
 
   @Get(":id")
   findOneBond(@Param() params) {
     return this.bondService.findOneBond(params.id);
   }
-
 
   @Post("upload-bond-image")
   @UseInterceptors(FileInterceptor("file"))

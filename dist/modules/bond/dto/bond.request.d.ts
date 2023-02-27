@@ -7,7 +7,6 @@ export declare class CreateBondInput {
     phoneNumber: string;
     websiteUrl: string;
     companyRegistrationNumber: string;
-    socialMedia: string[];
     organizationIncorporated: boolean;
     organizationLegalEstablishmentDate: string;
     organizationRevenue: string;

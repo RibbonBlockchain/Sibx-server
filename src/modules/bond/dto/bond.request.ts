@@ -22,8 +22,6 @@ export class CreateBondInput {
   websiteUrl: string;
   @IsString()
   companyRegistrationNumber: string;
-  @IsArray()
-  socialMedia: string[];
   @IsBoolean()
   organizationIncorporated: boolean;
   @IsString()

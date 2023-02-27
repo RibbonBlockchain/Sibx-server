@@ -35,7 +35,6 @@ model Bond {
   phoneNumber                        String
   websiteUrl                         String
   companyRegistrationNumber          String
-  socialMedia                        String[]
   organizationIncorporated           Boolean
   organizationLegalEstablishmentDate String
   organizationRevenue                String
