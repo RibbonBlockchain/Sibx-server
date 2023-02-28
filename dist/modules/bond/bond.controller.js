@@ -27,6 +27,7 @@ let BondController = class BondController {
         this.cloudinaryService = cloudinaryService;
     }
     createBond(req, input) {
+        console.log(req.user.userId);
         return this.bondService.createBond(req.user.userId, input);
     }
     findAllBonds() {
