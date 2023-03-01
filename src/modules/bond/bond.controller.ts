@@ -22,11 +22,6 @@ import { CreateBondInput, UploadImageDto } from "./dto/bond.request";
 export class BondController {
   constructor(private readonly bondService: BondService, private readonly cloudinaryService: CloudinaryService) {}
 
-  @Get(":id")
-  findOneBond(@Param() params) {
-    return this.bondService.findOneBond(params.id);
-  }
-
   @Auth()
   @Post("create")
   createBond(@Request() req, @Body() input: CreateBondInput) {
@@ -41,6 +36,11 @@ export class BondController {
   @Get("type")
   findBondType(@Query("type") type: BOND_CATEGORY) {
     return this.bondService.findBondType(type);
+  }
+
+  @Get(":id")
+  findOneBond(@Param() params) {
+    return this.bondService.findOneBond(params.id);
   }
 
   @Post("upload-bond-image")
