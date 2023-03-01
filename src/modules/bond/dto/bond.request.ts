@@ -1,11 +1,5 @@
-import { BOND_CATEGORY } from "@prisma/client";
-import {
-  IsArray,
-  IsBoolean,
-  IsEnum,
-  IsNumber,
-  IsString,
-} from "class-validator";
+import { BOND_CATEGORY, PAYMENT_TYPE } from "@prisma/client";
+import { IsBoolean, IsEnum, IsNumber, IsString } from "class-validator";
 
 export class CreateBondInput {
   @IsString()
@@ -83,4 +77,13 @@ export class CreateBondInput {
 export class UploadImageDto {
   @IsString()
   imageFor: string;
+}
+
+export class PurchaseBondDto {
+  @IsNumber()
+  bondId: number;
+  @IsNumber()
+  amount: number;
+  @IsEnum(PAYMENT_TYPE)
+  paymentType: PAYMENT_TYPE;
 }

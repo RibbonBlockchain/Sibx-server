@@ -16,7 +16,11 @@ import { IMAGE_TYPE } from "../../constants";
 import { Auth } from "../auth/decorators/auth.decorator";
 import { CloudinaryService } from "../cloudinary/cloudinary.service";
 import { BondService } from "./bond.service";
-import { CreateBondInput, UploadImageDto } from "./dto/bond.request";
+import {
+  CreateBondInput,
+  PurchaseBondDto,
+  UploadImageDto,
+} from "./dto/bond.request";
 
 @Controller("bond")
 export class BondController {
@@ -69,5 +73,11 @@ export class BondController {
         isUploaded: true,
       },
     };
+  }
+
+  @Auth()
+  @Post("purchase")
+  purchaseBond(@Request() req, @Body() input: PurchaseBondDto) {
+    return this.bondService.purchaseBond(req.user.userId, input);
   }
 }

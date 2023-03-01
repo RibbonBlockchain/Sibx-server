@@ -1,4 +1,4 @@
-import { BOND_CATEGORY } from "@prisma/client";
+import { BOND_CATEGORY, PAYMENT_TYPE } from "@prisma/client";
 export declare class CreateBondInput {
     name: string;
     image: string;
@@ -38,4 +38,9 @@ export declare class CreateBondInput {
 }
 export declare class UploadImageDto {
     imageFor: string;
+}
+export declare class PurchaseBondDto {
+    bondId: number;
+    amount: number;
+    paymentType: PAYMENT_TYPE;
 }

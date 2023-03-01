@@ -27,7 +27,6 @@ let BondController = class BondController {
         this.cloudinaryService = cloudinaryService;
     }
     createBond(req, input) {
-        console.log(req.user.userId);
         return this.bondService.createBond(req.user.userId, input);
     }
     findAllBonds() {
@@ -54,6 +53,9 @@ let BondController = class BondController {
                 isUploaded: true,
             },
         };
+    }
+    purchaseBond(req, input) {
+        return this.bondService.purchaseBond(req.user.userId, input);
     }
 };
 __decorate([
@@ -94,6 +96,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, bond_request_1.UploadImageDto]),
     __metadata("design:returntype", Promise)
 ], BondController.prototype, "uploadBondImage", null);
+__decorate([
+    (0, auth_decorator_1.Auth)(),
+    (0, common_1.Post)("purchase"),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, bond_request_1.PurchaseBondDto]),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "purchaseBond", null);
 BondController = __decorate([
     (0, common_1.Controller)("bond"),
     __metadata("design:paramtypes", [bond_service_1.BondService,

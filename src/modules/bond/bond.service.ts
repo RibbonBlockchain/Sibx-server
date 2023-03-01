@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { BOND_CATEGORY } from "@prisma/client";
 import { PrismaService } from "src/prisma.service";
-import { CreateBondInput } from "./dto/bond.request";
+import { CreateBondInput, PurchaseBondDto } from "./dto/bond.request";
 
 @Injectable()
 export class BondService {
@@ -17,7 +17,6 @@ export class BondService {
       });
       return true;
     } catch (err) {
-      console.log(err);
       throw new BadRequestException({
         name: "bond",
         message: "unable to create bond",
@@ -40,12 +39,42 @@ export class BondService {
       });
     } else if (type === BOND_CATEGORY.FIAT) {
       return await this.prisma.bond.findMany({
-        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.FIAT } ] },
+        where: {
+          OR: [
+            { category: BOND_CATEGORY.BOTH },
+            { category: BOND_CATEGORY.FIAT },
+          ],
+        },
       });
     } else {
       return await this.prisma.bond.findMany({
-        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.TOKENIZED } ] },
+        where: {
+          OR: [
+            { category: BOND_CATEGORY.BOTH },
+            { category: BOND_CATEGORY.TOKENIZED },
+          ],
+        },
       });
     }
+  }
+
+  async purchaseBond(userId: number, input: PurchaseBondDto) {
+    const { amount, bondId, paymentType } = input;
+    const bond = await this.prisma.bond.findUnique({ where: { id: bondId } });
+    if (!bond) {
+      throw new BadRequestException({
+        name: "bond",
+        message: "unable to find bond",
+      });
+    }
+    await this.prisma.purchsedBond.create({
+      data: {
+        amount,
+        paymentType,
+        bond: { connect: { id: bondId } },
+        user: { connect: { id: userId } },
+      },
+    });
+    return true;
   }
 }

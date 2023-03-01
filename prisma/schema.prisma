@@ -11,23 +11,24 @@ datasource db {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
-  name        String
-  email       String       @unique
-  username    String       @unique
-  password    String
-  accountType ACCOUNT_TYPE
-  verified    Boolean      @default(false)
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  token       Token[]
-  bond        Bond[]
+  id           Int            @id @default(autoincrement())
+  name         String
+  email        String         @unique
+  username     String         @unique
+  password     String
+  accountType  ACCOUNT_TYPE
+  verified     Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  token        Token[]
+  bond         Bond[]
+  purchsedBond PurchsedBond[]
 
   @@map("user")
 }
 
 model Bond {
-  id                                 Int           @id @default(autoincrement())
+  id                                 Int            @id @default(autoincrement())
   image                              String
   name                               String
   organizationName                   String
@@ -63,12 +64,27 @@ model Bond {
   websiteLink                        String
   other                              String
   category                           BOND_CATEGORY
-  user                               User?         @relation(fields: [userId], references: [id])
+  user                               User?          @relation(fields: [userId], references: [id])
   userId                             Int?
-  createdAt                          DateTime      @default(now())
-  updatedAt                          DateTime      @updatedAt
+  createdAt                          DateTime       @default(now())
+  updatedAt                          DateTime       @updatedAt
+  purchsedBond                       PurchsedBond[]
 
   @@map("bond")
+}
+
+model PurchsedBond {
+  id          Int          @id @default(autoincrement())
+  user        User?        @relation(fields: [userId], references: [id])
+  userId      Int?
+  bond        Bond?        @relation(fields: [bondId], references: [id])
+  bondId      Int?
+  amount      Int
+  paymentType PAYMENT_TYPE
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@map("purchased_bond")
 }
 
 model Token {
@@ -95,4 +111,10 @@ enum BOND_CATEGORY {
   FIAT
   TOKENIZED
   BOTH
+}
+
+enum PAYMENT_TYPE {
+  CARD
+  WALLET
+  CRYPTO
 }

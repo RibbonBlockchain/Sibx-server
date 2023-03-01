@@ -2,7 +2,7 @@
 import { BOND_CATEGORY } from "@prisma/client";
 import { CloudinaryService } from "../cloudinary/cloudinary.service";
 import { BondService } from "./bond.service";
-import { CreateBondInput, UploadImageDto } from "./dto/bond.request";
+import { CreateBondInput, PurchaseBondDto, UploadImageDto } from "./dto/bond.request";
 export declare class BondController {
     private readonly bondService;
     private readonly cloudinaryService;
@@ -18,4 +18,5 @@ export declare class BondController {
             isUploaded: boolean;
         };
     }>;
+    purchaseBond(req: any, input: PurchaseBondDto): Promise<boolean>;
 }

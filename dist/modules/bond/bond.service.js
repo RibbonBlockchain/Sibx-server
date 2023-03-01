@@ -25,7 +25,6 @@ let BondService = class BondService {
             return true;
         }
         catch (err) {
-            console.log(err);
             throw new common_1.BadRequestException({
                 name: "bond",
                 message: "unable to create bond",
@@ -46,14 +45,43 @@ let BondService = class BondService {
         }
         else if (type === client_1.BOND_CATEGORY.FIAT) {
             return await this.prisma.bond.findMany({
-                where: { OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.FIAT }] },
+                where: {
+                    OR: [
+                        { category: client_1.BOND_CATEGORY.BOTH },
+                        { category: client_1.BOND_CATEGORY.FIAT },
+                    ],
+                },
             });
         }
         else {
             return await this.prisma.bond.findMany({
-                where: { OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.TOKENIZED }] },
+                where: {
+                    OR: [
+                        { category: client_1.BOND_CATEGORY.BOTH },
+                        { category: client_1.BOND_CATEGORY.TOKENIZED },
+                    ],
+                },
             });
         }
+    }
+    async purchaseBond(userId, input) {
+        const { amount, bondId, paymentType } = input;
+        const bond = await this.prisma.bond.findUnique({ where: { id: bondId } });
+        if (!bond) {
+            throw new common_1.BadRequestException({
+                name: "bond",
+                message: "unable to find bond",
+            });
+        }
+        await this.prisma.purchsedBond.create({
+            data: {
+                amount,
+                paymentType,
+                bond: { connect: { id: bondId } },
+                user: { connect: { id: userId } },
+            },
+        });
+        return true;
     }
 };
 BondService = __decorate([
