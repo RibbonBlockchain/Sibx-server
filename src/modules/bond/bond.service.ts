@@ -30,7 +30,7 @@ export class BondService {
   }
 
   async findOneBond(bondId: number) {
-    return await this.prisma.bond.findUnique({ where: { id: bondId } });
+    return await this.prisma.bond.findUnique({ where: { id: Number(bondId) } });
   }
 
   async findBondType(type: BOND_CATEGORY) {
@@ -40,11 +40,11 @@ export class BondService {
       });
     } else if (type === BOND_CATEGORY.FIAT) {
       return await this.prisma.bond.findMany({
-        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.FIAT } ] },
+        where: { OR: [{ category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.FIAT }] },
       });
     } else {
       return await this.prisma.bond.findMany({
-        where: { OR: [ { category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.TOKENIZED } ] },
+        where: { OR: [{ category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.TOKENIZED }] },
       });
     }
   }
