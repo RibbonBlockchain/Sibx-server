@@ -84,6 +84,8 @@ export class PurchaseBondDto {
   bondId: number;
   @IsNumber()
   amount: number;
+  @IsNumber()
+  tx_ref: string;
   @IsEnum(PAYMENT_TYPE)
   paymentType: PAYMENT_TYPE;
 }

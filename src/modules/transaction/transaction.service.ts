@@ -1,15 +1,21 @@
 import { Injectable } from "@nestjs/common";
+import { PAYMENT_TYPE } from "@prisma/client";
 import axios from "axios";
+import { Response } from "express";
 import LazerPay from "lazerpay-node-sdk";
+import { PrismaService } from "src/prisma.service";
 import { makeid } from "../../helpers/generateString";
 import { InitiatePaymentParams } from "./dto/request.dto";
 
 @Injectable()
 export class TransactionService {
+  constructor(private prisma: PrismaService) {}
+
   async initiateFlutterwaveTransaction(input: InitiatePaymentParams) {
-    const { amount, email, name, phoneNumber } = input;
+    const { amount, email, name, phoneNumber, bondId, userId } = input;
+    const tx_ref = makeid(8);
     var data = JSON.stringify({
-      tx_ref: makeid(8),
+      tx_ref,
       amount,
       currency: "USD",
       redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
@@ -26,6 +32,16 @@ export class TransactionService {
     });
 
     try {
+      await this.prisma.purchsedBond.create({
+        data: {
+          amount,
+          paymentType: PAYMENT_TYPE.CARD,
+          bond: { connect: { id: bondId } },
+          user: { connect: { id: userId } },
+          tx_ref,
+        },
+      });
+
       const response = await axios({
         method: "post",
         url: "https://api.flutterwave.com/v3/payments",
@@ -37,6 +53,7 @@ export class TransactionService {
       });
       return response.data;
     } catch (err) {
+      console.log(err);
       console.log(err.response.data.error);
     }
   }
@@ -69,5 +86,34 @@ export class TransactionService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async verifyFlutterwaveCheckout(data: any, res: Response) {
+    console.log(data);
+    const tx_ref = data.tx_ref;
+    const status = data.status;
+    const amount = data.amount;
+
+    const user = await this.prisma.user.findUnique({
+      where: { email: data.customer.email },
+    });
+
+    if (status === "successful") {
+      await this.prisma.purchsedBond.updateMany({
+        where: {
+          AND: [
+            { tx_ref: { equals: tx_ref } },
+            { userId: { equals: user.id } },
+            { paid: { equals: false } },
+            { amount: { equals: amount } },
+          ],
+        },
+        data: {
+          paid: true,
+        },
+      });
+    }
+
+    return res.status(200).end();
   }
 }

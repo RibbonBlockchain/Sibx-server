@@ -106,4 +106,18 @@ export class UserService {
 
     return user;
   }
+
+  async findOneById(userId: number): Promise<User | undefined> {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+
+    if (user.verified === false) {
+      throw new BadRequestException({
+        name: "user",
+        message: "Kindly verify your account!",
+      });
+    }
+
+    delete user.password;
+    return user;
+  }
 }

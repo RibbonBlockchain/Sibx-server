@@ -1,4 +1,5 @@
-import { Controller, Post, Body, Get } from "@nestjs/common";
+import { Controller, Post, Body, Get, Res, Req } from "@nestjs/common";
+import { Request, Response } from "express";
 import { InitiatePaymentParams } from "./dto/request.dto";
 import { TransactionService } from "./transaction.service";
 
@@ -9,6 +10,15 @@ export class TransactionController {
   @Post("initiate-flutterwave-payment")
   initiateFlutterwavePayment(@Body() input: InitiatePaymentParams) {
     return this.transactionService.initiateFlutterwaveTransaction(input);
+  }
+
+  @Post("flutterwave-webhook")
+  confirmFLutterPayment(@Res() res: Response, @Req() req: Request) {
+    console.log(req.body.data);
+    return this.transactionService.verifyFlutterwaveCheckout(
+      req.body.data,
+      res
+    );
   }
 
   @Post("initiate-lazerpay-payment")

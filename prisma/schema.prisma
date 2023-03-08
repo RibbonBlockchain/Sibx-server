@@ -81,6 +81,8 @@ model PurchsedBond {
   bondId      Int?
   amount      Int
   paymentType PAYMENT_TYPE
+  tx_ref      String
+  paid        Boolean      @default(false)
   createdAt   DateTime     @default(now())
   updatedAt   DateTime     @updatedAt
 

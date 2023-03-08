@@ -59,7 +59,7 @@ export class BondService {
   }
 
   async purchaseBond(userId: number, input: PurchaseBondDto) {
-    const { amount, bondId, paymentType } = input;
+    const { amount, bondId, paymentType, tx_ref } = input;
     const bond = await this.prisma.bond.findUnique({ where: { id: bondId } });
     if (!bond) {
       throw new BadRequestException({
@@ -73,6 +73,7 @@ export class BondService {
         paymentType,
         bond: { connect: { id: bondId } },
         user: { connect: { id: userId } },
+        tx_ref,
       },
     });
     return true;

@@ -1,4 +1,5 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, Request } from "@nestjs/common";
+import { Auth } from "../auth/decorators/auth.decorator";
 import { UserRegisterInput } from "./dto/user.request";
 import { UserService } from "./user.service";
 
@@ -14,5 +15,11 @@ export class UserController {
   @Post("confirm-token")
   confirmUserToken(@Body() input: { token: string }) {
     return this.userService.confirmUserToken(input.token);
+  }
+
+  @Auth()
+  @Get("profile")
+  purchaseBond(@Request() req) {
+    return this.userService.findOneById(req.user.userId);
   }
 }
