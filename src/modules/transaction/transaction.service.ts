@@ -18,7 +18,7 @@ export class TransactionService {
       tx_ref,
       amount,
       currency: "USD",
-      // redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
+      redirect_url: `${process.env.CLIENT_DEPLOYED_URL}/bonds/new-listing`,
       customer: {
         email,
         phonenumber: phoneNumber,
@@ -27,7 +27,7 @@ export class TransactionService {
       payment_options: "card, mobilemoneyghana, ussd",
       customizations: {
         title: "SIBx",
-        // logo: 'http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png',
+        logo: "http://www.piedpiper.com/app/themes/joystick-v27/images/logo.png",
       },
     });
 
