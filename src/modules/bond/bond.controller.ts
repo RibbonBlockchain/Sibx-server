@@ -24,7 +24,10 @@ import {
 
 @Controller("bond")
 export class BondController {
-  constructor(private readonly bondService: BondService, private readonly cloudinaryService: CloudinaryService) {}
+  constructor(
+    private readonly bondService: BondService,
+    private readonly cloudinaryService: CloudinaryService
+  ) {}
 
   @Auth()
   @Post("create")
@@ -44,19 +47,25 @@ export class BondController {
 
   @Get(":id")
   findOneBond(@Param() params) {
-    return this.bondService.findOneBond(params.id);
+    return this.bondService.findOneBond(Number(params.id));
   }
 
   @Post("upload-bond-image")
   @UseInterceptors(FileInterceptor("file"))
-  async uploadBondImage(@UploadedFile() file: Express.Multer.File, @Body() input: UploadImageDto) {
+  async uploadBondImage(
+    @UploadedFile() file: Express.Multer.File,
+    @Body() input: UploadImageDto
+  ) {
     if (input.imageFor !== IMAGE_TYPE.BOND) {
       throw new BadRequestException({
         name: "upload",
         message: "Upload not successful",
       });
     }
-    const uploadData = await this.cloudinaryService.uploadMedia(file, input.imageFor);
+    const uploadData = await this.cloudinaryService.uploadMedia(
+      file,
+      input.imageFor
+    );
     return {
       data: {
         imageUrl: uploadData.secure_url,
