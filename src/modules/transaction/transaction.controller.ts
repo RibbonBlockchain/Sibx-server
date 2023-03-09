@@ -13,8 +13,9 @@ export class TransactionController {
   }
 
   @Post("flutterwave-webhook")
-  confirmFLutterPayment(@Res() res: Response, @Req() req: Request) {
-    console.log(req.body.data);
+  confirmFlutterPayment(@Res() res: Response, @Req() req: Request) {
+    console.log("Flutter", req.body);
+    return;
     return this.transactionService.verifyFlutterwaveCheckout(
       req.body.data,
       res

@@ -89,7 +89,6 @@ export class TransactionService {
   }
 
   async verifyFlutterwaveCheckout(data: any, res: Response) {
-    console.log(data);
     const tx_ref = data.tx_ref;
     const status = data.status;
     const amount = data.amount;
