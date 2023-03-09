@@ -18,7 +18,7 @@ export class TransactionService {
       tx_ref,
       amount,
       currency: "USD",
-      redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
+      // redirect_url: "https://webhook.site/9d0b00ba-9a69-44fa-a43d-a82c33c36fdc",
       customer: {
         email,
         phonenumber: phoneNumber,
@@ -89,7 +89,7 @@ export class TransactionService {
   }
 
   async verifyFlutterwaveCheckout(data: any, res: Response) {
-    const tx_ref = data.tx_ref;
+    const tx_ref = data.txRef;
     const status = data.status;
     const amount = data.amount;
 
@@ -104,7 +104,7 @@ export class TransactionService {
             { tx_ref: { equals: tx_ref } },
             { userId: { equals: user.id } },
             { paid: { equals: false } },
-            { amount: { equals: amount } },
+            { amount: { equals: Number(amount) } },
           ],
         },
         data: {

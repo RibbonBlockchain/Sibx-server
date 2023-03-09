@@ -15,11 +15,7 @@ export class TransactionController {
   @Post("flutterwave-webhook")
   confirmFlutterPayment(@Res() res: Response, @Req() req: Request) {
     console.log("Flutter", req.body);
-    return;
-    return this.transactionService.verifyFlutterwaveCheckout(
-      req.body.data,
-      res
-    );
+    return this.transactionService.verifyFlutterwaveCheckout(req.body, res);
   }
 
   @Post("initiate-lazerpay-payment")
