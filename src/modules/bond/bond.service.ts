@@ -33,12 +33,15 @@ export class BondService {
   }
 
   async getBondStats(id: number) {
-    const [] = await this.prisma.$transaction(async (tx) => {
-      return [
-        await tx.purchsedBond.count({ where: { bondId: id } }),
-        await tx.purchsedBond.groupBy({ by: ["bondId"], where: { bondId: id }, _sum: { amount: true } }),
-      ];
+    const total = await this.prisma.purchsedBond.count({ where: { bondId: id } });
+    const stats = await this.prisma.purchsedBond.groupBy({
+      by: ["bondId"],
+      where: { bondId: id },
+      _sum: { amount: true },
+      _count: true,
     });
+
+    return { total, stats };
   }
 
   async findBondType(type: BOND_CATEGORY) {
