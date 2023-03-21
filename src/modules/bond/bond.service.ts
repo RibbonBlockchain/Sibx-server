@@ -78,4 +78,11 @@ export class BondService {
     });
     return true;
   }
+
+  async bondAmountInvested(bondId: number) {
+    return await this.prisma.purchsedBond.aggregate({
+      _sum: { amount: true },
+      where: { bondId },
+    });
+  }
 }

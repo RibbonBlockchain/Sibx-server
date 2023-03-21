@@ -80,4 +80,9 @@ export class BondController {
   purchaseBond(@Request() req, @Body() input: PurchaseBondDto) {
     return this.bondService.purchaseBond(req.user.userId, input);
   }
+
+  @Get("invested/:id")
+  bondAmountInvested(@Param() params) {
+    return this.bondService.bondAmountInvested(Number(params.id));
+  }
 }
