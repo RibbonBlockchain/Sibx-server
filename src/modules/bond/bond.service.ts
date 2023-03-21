@@ -32,6 +32,18 @@ export class BondService {
     return await this.prisma.bond.findUnique({ where: { id: bondId } });
   }
 
+  async getBondStats(id: number) {
+    const total = await this.prisma.purchsedBond.count({ where: { bondId: id } });
+    const stats = await this.prisma.purchsedBond.groupBy({
+      by: ["bondId"],
+      where: { bondId: id },
+      _sum: { amount: true },
+      _count: true,
+    });
+
+    return { total, stats };
+  }
+
   async findBondType(type: BOND_CATEGORY) {
     if (type === BOND_CATEGORY.BOTH) {
       return await this.prisma.bond.findMany({
@@ -40,19 +52,13 @@ export class BondService {
     } else if (type === BOND_CATEGORY.FIAT) {
       return await this.prisma.bond.findMany({
         where: {
-          OR: [
-            { category: BOND_CATEGORY.BOTH },
-            { category: BOND_CATEGORY.FIAT },
-          ],
+          OR: [{ category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.FIAT }],
         },
       });
     } else {
       return await this.prisma.bond.findMany({
         where: {
-          OR: [
-            { category: BOND_CATEGORY.BOTH },
-            { category: BOND_CATEGORY.TOKENIZED },
-          ],
+          OR: [{ category: BOND_CATEGORY.BOTH }, { category: BOND_CATEGORY.TOKENIZED }],
         },
       });
     }
