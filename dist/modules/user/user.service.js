@@ -100,7 +100,10 @@ let UserService = class UserService {
         return user;
     }
     async findOneById(userId) {
-        const user = await this.prisma.user.findUnique({ where: { id: userId } });
+        const user = await this.prisma.user.findUnique({
+            where: { id: userId },
+            include: { profile: true },
+        });
         if (user.verified === false) {
             throw new common_1.BadRequestException({
                 name: "user",
@@ -109,6 +112,12 @@ let UserService = class UserService {
         }
         delete user.password;
         return user;
+    }
+    async updateProfile(userId, input) {
+        await this.prisma.profile.create({
+            data: Object.assign(Object.assign({}, input), { user: { connect: { id: userId } } }),
+        });
+        return true;
     }
 };
 UserService = __decorate([

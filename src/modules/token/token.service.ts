@@ -40,6 +40,7 @@ export class TokenService {
         ],
       },
     });
+
     if (!TOKEN) return false;
     if (unixToDaysLeft(Number(TOKEN.expires)) < 1) return false;
     if (!TOKEN.validity) return false;

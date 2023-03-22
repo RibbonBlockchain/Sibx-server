@@ -6,3 +6,11 @@ export declare class UserRegisterInput {
     password: string;
     accountType: ACCOUNT_TYPE;
 }
+export declare class UserProfileInput {
+    phoneNumber: string;
+    city: string;
+    state: string;
+    zipCode: string;
+    addressOne: string;
+    addressTwo: string;
+}

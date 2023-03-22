@@ -35,6 +35,9 @@ let BondController = class BondController {
     findBondType(type) {
         return this.bondService.findBondType(type);
     }
+    getBondStats(params) {
+        return this.bondService.getBondStats(Number(params.id));
+    }
     findOneBond(params) {
         return this.bondService.findOneBond(Number(params.id));
     }
@@ -84,6 +87,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], BondController.prototype, "findBondType", null);
 __decorate([
+    (0, common_1.Get)("stats/:id"),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], BondController.prototype, "getBondStats", null);
+__decorate([
     (0, common_1.Get)(":id"),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
@@ -117,8 +127,7 @@ __decorate([
 ], BondController.prototype, "bondAmountInvested", null);
 BondController = __decorate([
     (0, common_1.Controller)("bond"),
-    __metadata("design:paramtypes", [bond_service_1.BondService,
-        cloudinary_service_1.CloudinaryService])
+    __metadata("design:paramtypes", [bond_service_1.BondService, cloudinary_service_1.CloudinaryService])
 ], BondController);
 exports.BondController = BondController;
 //# sourceMappingURL=bond.controller.js.map

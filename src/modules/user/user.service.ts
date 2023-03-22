@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
 import { PrismaService } from "src/prisma.service";
-import { UserRegisterInput } from "./dto/user.request";
+import { UserProfileInput, UserRegisterInput } from "./dto/user.request";
 import * as argon2 from "argon2";
 import { MailService } from "../mail/mail.service";
 import { MAIL_MESSAGE, MAIL_SUBJECT } from "../mail/mail.constants";
@@ -108,7 +108,10 @@ export class UserService {
   }
 
   async findOneById(userId: number): Promise<User | undefined> {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      include: { profile: true },
+    });
 
     if (user.verified === false) {
       throw new BadRequestException({
@@ -119,5 +122,18 @@ export class UserService {
 
     delete user.password;
     return user;
+  }
+
+  async updateProfile(
+    userId: number,
+    input: UserProfileInput
+  ): Promise<Boolean> {
+    await this.prisma.profile.create({
+      data: {
+        ...input,
+        user: { connect: { id: userId } },
+      },
+    });
+    return true;
   }
 }

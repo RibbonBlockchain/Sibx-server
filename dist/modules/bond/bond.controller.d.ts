@@ -10,6 +10,15 @@ export declare class BondController {
     createBond(req: any, input: CreateBondInput): Promise<any>;
     findAllBonds(): Promise<import(".prisma/client").Bond[]>;
     findBondType(type: BOND_CATEGORY): Promise<import(".prisma/client").Bond[]>;
+    getBondStats(params: any): Promise<{
+        total: number;
+        stats: (import(".prisma/client").Prisma.PickArray<import(".prisma/client").Prisma.PurchsedBondGroupByOutputType, "bondId"[]> & {
+            _sum: {
+                amount: number;
+            };
+            _count: number;
+        })[];
+    }>;
     findOneBond(params: any): Promise<import(".prisma/client").Bond>;
     uploadBondImage(file: Express.Multer.File, input: UploadImageDto): Promise<{
         data: {

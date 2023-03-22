@@ -37,6 +37,16 @@ let BondService = class BondService {
     async findOneBond(bondId) {
         return await this.prisma.bond.findUnique({ where: { id: bondId } });
     }
+    async getBondStats(id) {
+        const total = await this.prisma.purchsedBond.count({ where: { bondId: id } });
+        const stats = await this.prisma.purchsedBond.groupBy({
+            by: ["bondId"],
+            where: { bondId: id },
+            _sum: { amount: true },
+            _count: true,
+        });
+        return { total, stats };
+    }
     async findBondType(type) {
         if (type === client_1.BOND_CATEGORY.BOTH) {
             return await this.prisma.bond.findMany({
@@ -46,20 +56,14 @@ let BondService = class BondService {
         else if (type === client_1.BOND_CATEGORY.FIAT) {
             return await this.prisma.bond.findMany({
                 where: {
-                    OR: [
-                        { category: client_1.BOND_CATEGORY.BOTH },
-                        { category: client_1.BOND_CATEGORY.FIAT },
-                    ],
+                    OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.FIAT }],
                 },
             });
         }
         else {
             return await this.prisma.bond.findMany({
                 where: {
-                    OR: [
-                        { category: client_1.BOND_CATEGORY.BOTH },
-                        { category: client_1.BOND_CATEGORY.TOKENIZED },
-                    ],
+                    OR: [{ category: client_1.BOND_CATEGORY.BOTH }, { category: client_1.BOND_CATEGORY.TOKENIZED }],
                 },
             });
         }

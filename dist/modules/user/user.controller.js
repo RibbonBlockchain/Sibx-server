@@ -30,6 +30,9 @@ let UserController = class UserController {
     purchaseBond(req) {
         return this.userService.findOneById(req.user.userId);
     }
+    updateProfile(req, input) {
+        return this.userService.updateProfile(req.user.userId, input);
+    }
 };
 __decorate([
     (0, common_1.Post)("register"),
@@ -53,6 +56,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "purchaseBond", null);
+__decorate([
+    (0, auth_decorator_1.Auth)(),
+    (0, common_1.Post)("profile"),
+    __param(0, (0, common_1.Request)()),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, user_request_1.UserProfileInput]),
+    __metadata("design:returntype", void 0)
+], UserController.prototype, "updateProfile", null);
 UserController = __decorate([
     (0, common_1.Controller)("user"),
     __metadata("design:paramtypes", [user_service_1.UserService])

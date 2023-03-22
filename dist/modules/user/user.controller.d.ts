@@ -1,4 +1,4 @@
-import { UserRegisterInput } from "./dto/user.request";
+import { UserProfileInput, UserRegisterInput } from "./dto/user.request";
 import { UserService } from "./user.service";
 export declare class UserController {
     private readonly userService;
@@ -8,4 +8,5 @@ export declare class UserController {
         token: string;
     }): Promise<boolean>;
     purchaseBond(req: any): Promise<import(".prisma/client").User>;
+    updateProfile(req: any, input: UserProfileInput): Promise<Boolean>;
 }
